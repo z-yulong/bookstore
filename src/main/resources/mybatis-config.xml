@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--读取配置文件-->
+    <properties resource="db.properties"/>
+    <!--————————————————————————————————————————————————————————————————————————————-->
+    <settings>
+        <!--
+            mapUnderscoreToCamelCase:
+            是否开启驼峰命名自动映射，即从经典数据库列名 A_COLUMN 映射到经典 Java 属性名 aColumn。
+        -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+
+    <!--————————————————————————————————————————————————————————————————————————————-->
+        <!--延时加载（懒加载）（全局）-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!--
+            按需加载: 不写此属性则默认为false
+                true: 分布查询是加载所有sql，即使它没用到
+                false: 只加载需要的sql
+        -->
+        <setting name="aggressiveLazyLoading" value="false"/>
+    </settings>
+    <!--————————————————————————————————————————————————————————————————————————————-->
+    <!--设置类型别名-->
+    <typeAliases>
+        <!--
+            type:需要起别名的类型
+            alias：别名
+            如果不设置alias，则默认别名就是类名且不区分大小写
+        -->
+        <!--<typeAlias type=""/>-->
+
+        <!--包下所有类都设置默认别名-->
+        <package name="com.zyl.bookstore.entity"/>
+    </typeAliases>
+    <!--————————————————————————————————————————————————————————————————————————————-->
+    <!--默认数据源development-->
+    <environments default="development">
+        <environment id="development">
+            <!--
+                transactionManager:设置事务管理器
+                属性：type=JDBC/MANAGED
+                JDBC：表示使用jdbc原生的事务管理方式
+                MANAGED：被管理，例如spring
+            -->
+            <transactionManager type="JDBC"/>
+            <!--
+                dataSource：设置数据源
+                属性：type= POOLED/UNPOOLED/JNDI
+                POOLED:表示使用数据库连接池
+                UNPOOLED：表示不使用数据库连接池
+                JNDI：表示使用上下文中的数据源
+            -->
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!--————————————————————————————————————————————————————————————————————————————-->
+    <!--映射文件位置-->
+    <mappers>
+        <!--<mapper resource="mapper/UserMapper.xml"/>-->
+        <!--
+            以包的方式引入映射文件
+            1.mapper接口和映射文件的包必须一致
+            2.mapper接口和映射文件的名字必须一致
+        -->
+        <package name="com.zyl.bookstore.mapper"/>
+    </mappers>
+</configuration>
