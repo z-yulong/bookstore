@@ -34,7 +34,7 @@
         <!--<typeAlias type=""/>-->
 
         <!--包下所有类都设置默认别名-->
-        <package name="com.zyl.bookstore.entity"/>
+        <package name="com.zyl.bookstore.model.entity"/>
     </typeAliases>
     <!--————————————————————————————————————————————————————————————————————————————-->
     <!--默认数据源development-->

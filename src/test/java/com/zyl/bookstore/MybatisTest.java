@@ -1,9 +1,9 @@
 package com.zyl.bookstore;
 
-import com.zyl.bookstore.common.utils.SnowflakeId;
-import com.zyl.bookstore.entity.User;
 import com.zyl.bookstore.mapper.UserMapper;
+import com.zyl.bookstore.model.entity.User;
 import com.zyl.bookstore.utils.MybatisUtil;
+import com.zyl.bookstore.utils.SnowflakeId;
 import org.junit.Test;
 
 import java.util.List;
@@ -18,18 +18,14 @@ public class MybatisTest {
     public void testGetAllUser(){
         UserMapper mapper = MybatisUtil.getMapper(UserMapper.class);
         List<User> allUser = mapper.getAllUser();
+        MybatisUtil.closeSqlSession();
         allUser.forEach(System.out::println);
-    }
-    @Test
-    public void test(){
-
-
     }
 
     @Test
     public void testGetEmpAndDeptStepById(){
         UserMapper mapper  = MybatisUtil.getMapper(UserMapper.class);
-        System.out.println(mapper.getUserById(1));
+        System.out.println(mapper.getUserById(186589202731896832L));
     }
 
     @Test
@@ -41,9 +37,14 @@ public class MybatisTest {
 
     @Test
     public void testRegist(){
-        UserMapper mapper = MybatisUtil.getMapper(UserMapper.class);
-        User uesr = new User("name", "pwd", "zhuyl1006@163.com");
-        mapper.registUser(uesr);
+        try {
+            UserMapper mapper = MybatisUtil.getMapper(UserMapper.class,false);
+            User uesr = new User(123323L,"na2medRR", "pwd", "zhuyl1006@163.com");
+            mapper.registUser(uesr);
+            MybatisUtil.commitTransaction();
+        }catch (Exception e){
+            MybatisUtil.rollbackTransaction();
+        }
 
     }
 //    雪花算法

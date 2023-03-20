@@ -73,6 +73,14 @@
             <version>3.5.9</version>
         </dependency>
 
+        <!-- mybatis-plus -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus</artifactId>
+            <version>3.5.3.1</version>
+        </dependency>
+
+
         <!--commons-dbutils -->
         <dependency>
             <groupId>commons-dbutils</groupId>

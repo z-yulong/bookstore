@@ -1,6 +1,7 @@
 package com.zyl.bookstore.mapper;
 
-import com.zyl.bookstore.entity.User;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.zyl.bookstore.model.entity.User;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -10,8 +11,8 @@ import java.util.List;
  * @date 2023/3/15 15:49
  */
 
-public interface UserMapper {
-    User getUserById(@Param("id") Integer id);
+public interface UserMapper extends BaseMapper<User> {
+    User getUserById(@Param("id") Long id);
 
     List<User> getAllUser();
     int registUser(User user);
